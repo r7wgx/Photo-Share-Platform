@@ -1,0 +1,15 @@
+{
+  "name": "photo-share-platform",
+  "version": "1.0.0",
+  "description": "I use NodeJS, ExpressJS and MongoDB",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramazan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
