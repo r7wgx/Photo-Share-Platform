@@ -3,16 +3,8 @@ import mongoose from 'mongoose';
 const {Schema} = mongoose;
 
 const photoSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    description: {
-        tpye: String,
-        required: true,
-        trim: true
-    },
+    name: String,
+    description: String,
     uploadedTime: {
         type: Date,
         default: Date.now
