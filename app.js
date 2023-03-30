@@ -17,9 +17,10 @@ conn();
 
 app.set("view engine", 'ejs');
 
-// static files middleware
+// middlaware
 
-app.use(express.static('public'));
+app.use(express.static('public')); // static files middleware
+app.use(express.json()); // post isteyi zamani req body-den gelen datalari oxumaq ucun lazim olan middlaware
 
 // Router
 
