@@ -21,8 +21,8 @@ app.set("view engine", 'ejs');
 // middlaware
 
 app.use(express.static('public')); // static files middleware
-app.use(express.json()); // post isteyi zamani req body-den gelen datalari oxumaq ucun lazim olan middlaware
-app.use(express.urlencoded({extended: true})); // 
+app.use(express.json()); // middlaware required to read data from req body at post request time
+app.use(express.urlencoded({extended: true})); // middleware to parse the data in the form body
 
 // Router
 
