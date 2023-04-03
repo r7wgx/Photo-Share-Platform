@@ -4,6 +4,7 @@ import conn from './db.js';
 import pageRouter from "./routers/pageRouter.js";
 import photoRouter from "./routers/photoRouter.js";
 import userRouter from "./routers/userRouter.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,7 @@ app.set("view engine", 'ejs');
 app.use(express.static('public')); // static files middleware
 app.use(express.json()); // middlaware required to read data from req body at post request time
 app.use(express.urlencoded({extended: true})); // middleware to parse the data in the form body
+app.use(cookieParser());
 
 // Router
 

@@ -34,10 +34,12 @@ const loginUser = async (req, res) => {
         }
 
         if(same) {
-            res.status(200).json({
-                user,
-                token: createToken(user._id)
-            })
+            const token = createToken(user._id);
+            res.cookie("JWEBToken", token, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24
+            });
+            res.redirect("/users/dashboard");
         } else {
             res.status(401).json({
                 succeded: false,
@@ -46,13 +48,13 @@ const loginUser = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            succeded: false,
+            loginNotWorking: false,
             error
         })
     }
 }
 
-// JWT
+// Token create
 
 const createToken = (userId) => {
     return jwt.sign({userId}, process.env.JWT_TOKEN_SECRET_KEY, {
@@ -60,4 +62,12 @@ const createToken = (userId) => {
     })
 } 
 
-export {createUser, loginUser};
+// GET Dashboard  
+
+const getDashboard = (req, res) => {
+    res.render("dashboard", {
+        link: "dashboard"
+    });
+}
+
+export {createUser, loginUser, getDashboard};
