@@ -1,4 +1,1 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> bcd4369208a8d1090b00def98e02a11a9124582c
+# Photo sharing platform
