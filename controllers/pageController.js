@@ -21,4 +21,11 @@ const getLogin = (req,res) => {
         link: "login"
     } ) 
 }
-export {getAboutPage, getIndexPage, getRegister, getLogin}
+const getLoguot = (req, res) => {
+    res.cookie("JWEBToken", "", {
+        maxAge: 1
+    });
+    res.redirect("/");
+}
+
+export {getAboutPage, getIndexPage, getRegister, getLogin, getLoguot}
