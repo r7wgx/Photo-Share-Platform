@@ -5,6 +5,7 @@ import pageRouter from "./routers/pageRouter.js";
 import photoRouter from "./routers/photoRouter.js";
 import userRouter from "./routers/userRouter.js";
 import cookieParser from "cookie-parser";
+import { checkUser } from "./middlewares/authMiddleware.js";
 
 const app = express();
 const port = 3000;
@@ -28,6 +29,7 @@ app.use(cookieParser());
 
 // Router
 
+app.use("*", checkUser);
 app.use('/', pageRouter);
 app.use('/photo', photoRouter);
 app.use('/users', userRouter);
