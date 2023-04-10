@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from 'dotenv';
-import conn from './db.js';
+import conn from './db.js'; // database connection
 import pageRouter from "./routers/pageRouter.js";
 import photoRouter from "./routers/photoRouter.js";
 import userRouter from "./routers/userRouter.js";

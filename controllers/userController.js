@@ -6,12 +6,30 @@ import jwt from "jsonwebtoken";
 const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
-        res.redirect("/login")
+        res.status(201).json({user: user._id})
     } catch (error) {
-        res.status(500).json({
+
+        console.log(error);
+
+        let errObj = {}
+        
+        if(error.code === 11000) {
+            Object.keys(error.keyValue).forEach((key) => {
+                errObj[key] = `The ${error.keyValue[key]} is already registered`;
+            });
+        }
+        console.log(errObj);
+
+        if(error.name === "ValidationError") {
+            Object.keys(error.errors).forEach((key) => {
+                errObj[key] = error.errors[key].message;
+            });
+        }
+
+        res.status(400).json({
             succeded: false,
-            error
-        })
+            errObj
+        });
     }
 }
 
