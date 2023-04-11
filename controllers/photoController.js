@@ -1,12 +1,27 @@
 import Photo from '../model/photoModel.js';
-
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+ 
 const createPhoto = async (req, res) => {
+
+    const result = await cloudinary.uploader.upload(
+      req.files.image.tempFilePath, 
+      {
+        use_filename: true,
+        folder: "photo_share_platform"
+      }
+    )
+ 
   try {
     await Photo.create({
       name: req.body.name,
       description: req.body.description,
-      user: res.locals.user._id
+      user: res.locals.user._id,
+      url: result.secure_url
     });
+
+    fs.unlinkSync(req.files.image.tempFilePath); // delete file from temp after sending
+
     res.status(201).redirect(`/users/dashboard`);
   } catch (error) {
     res.status(500).json({
@@ -33,7 +48,7 @@ const getAllPhotos = async (req, res) => {
 
 const getImage = async (req, res) => {
     try {
-      const image = await Photo.findById({_id: req.params.id});
+      const image = await Photo.findById({_id: req.params.id}).populate("user");
       res.status(200).render('image', {
         image,
         link: 'photo'

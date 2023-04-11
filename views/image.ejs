@@ -19,12 +19,12 @@
                 <span>01</span>
                 <h2><%= image.name %></h2>
                 <p> <%= image.description %> </p>
-                <a class="read_more" href="about.html">Read More</a>
+                <a class="read_more" href="about.html">Publisher: <%= image.user.username %></a>
               </div>
             </div>
             <div class="col-md-6">
               <div class="about_img">
-                <figure><img src="/images/about_img.png" alt="#"/></figure>
+                <figure><img src="<%= image.url %>" alt="<%= image.name %>"/></figure>
               </div>
             </div>
           </div>
