@@ -17,6 +17,10 @@ const photoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "userSchema" // ref "userSchema" => usermodel.js => const User = mongoose.model (-=>"userSchema"<=-, userSchema)
       },
+    url: {
+      type: String,
+      required: true
+    },
     uploadedTime: {
         type: Date,
         default: Date.now
