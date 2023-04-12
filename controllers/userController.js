@@ -122,4 +122,60 @@ const getAUser = async (req, res) => {
         })
     }
 }
-export {createUser, loginUser, getDashboard, getAllUsers, getAUser};
+
+const follow = async (req,res) => {
+   try {
+    let user = await findByIdAndUpdate(
+        {_id: req.params.id},
+        {
+            $push: {followers: req.locals.user._id}
+        },
+        {new: true});  
+    user = await findByIdAndUpdate(
+        {_id: req.params.id},
+        {
+            $push: {followings: res.locals.user._id}
+        },
+        {new: true});
+    res.status(200).json({
+        succeded: true,
+        user
+    })
+    } catch (error) {
+        res.status(400).json({
+            succeded: false,
+            error
+        })
+   }
+}
+
+const unFollow = async (req,res) => {
+    try {
+       let user = await findByIdAndUpdate(
+           {_id: req.params.id},
+           { 
+               $pull: {followers: res.locals.user._id}
+           },
+           {new: true}
+       );   
+       user = await findByIdAndUpdate(
+           {_id: res.locals._id},
+           {
+               $pull: {followings: req.params.id }
+           },
+           {new: true}
+       );
+       
+       res.status(200).json({
+           succeded: true,
+           user
+       })
+    } catch (error) {
+        res.status(400).json({
+            succeded: false,
+            error
+        });
+    }
+}
+
+export {createUser, loginUser, getDashboard, getAllUsers, getAUser, follow, unFollow};
