@@ -9,7 +9,8 @@ router.route('/register').post(userController.createUser);
 router.route("/login").post(userController.loginUser);
 router.route("/").get(authMiddlaware.authToken, userController.getAllUsers);
 router.route("/:id").get(authMiddlaware.authToken, userController.getAUser);
-router.route("/:id/folow").put(authMiddlaware.authToken, userController.follow);
+router.route("/:id/follow").put(authMiddlaware.authToken, userController.follow);
 router.route("/:id/unfollow").put(authMiddlaware.authToken, userController.unFollow);
+
 
 export default router

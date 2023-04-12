@@ -5,6 +5,7 @@ import pageRouter from "./routers/pageRouter.js";
 import photoRouter from "./routers/photoRouter.js";
 import userRouter from "./routers/userRouter.js";
 import cookieParser from "cookie-parser";
+import methodOverride from "method-override";
 import { checkUser } from "./middlewares/authMiddleware.js";
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from "cloudinary";
@@ -36,6 +37,11 @@ app.use(express.json()); // middlaware required to read data from req body at po
 app.use(express.urlencoded({extended: true})); // middleware to parse the data in the form body
 app.use(cookieParser()); // middleware to parse the cookie
 app.use(fileUpload({ useTempFiles: true })); 
+app.use(
+    methodOverride('_method', {
+      methods: ['POST', 'GET'],
+    })
+  );
 
 // Router
 
