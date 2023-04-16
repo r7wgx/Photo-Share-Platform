@@ -20,6 +20,14 @@
                 <h2><%= image.name %></h2>
                 <p> <%= image.description %> </p>
                 <a class="read_more" href="about.html">Publisher: <%= image.user.username %></a>
+                <div style="margin-top: 30px ;">
+                  <ul style="display: flex; justify-content: space-between;">
+                     <li><a style="min-width: 266px;" class="read_more" href="#">Update</a></li>
+                     <li><a style="min-width: 266px;" class="read_more"
+                           href="/photo/<%= image._id %>?_method=DELETE"
+                           onclick="return confirm('Do you want to delete the photo')">Delete</a></li>
+                  </ul>
+               </div>
               </div>
             </div>
             <div class="col-md-6">

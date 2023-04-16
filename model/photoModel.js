@@ -24,6 +24,9 @@ const photoSchema = new Schema({
     uploadedTime: {
         type: Date,
         default: Date.now
+    },
+    image_id: {
+      type: String
     }
 })
 
