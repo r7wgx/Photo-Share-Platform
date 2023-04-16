@@ -48,6 +48,39 @@ const deletePohoto = async(req, res) => {
     })
   }
 }
+const updatePhoto = async(req,res) => {
+  try {
+    const photo = await Photo.findById(req.params.id);
+    
+    if(req.files) {
+      const photoId = photo.image_id; 
+      await cloudinary.uploader.destroy(photoId);
+      const result = await cloudinary.uploader.upload(
+        req.files.image.tempFilePath, 
+        {
+          use_filename: true,
+          folder: "photo_share_platform"
+        }
+      )
+      photo.url = result.secure_url;
+      photo.image_id = result.public_id
+
+      fs.unlinkSync(req.files.image.tempFilePath);
+    }
+
+    photo.description = req.body.description;
+    photo.name = req.body.name;
+
+    photo.save()
+
+    res.status(200).redirect(`/photo/${req.params.id}`);
+  } catch (error) {
+    res.status(400).json({
+      succeded: false,
+      error
+    })
+  }
+}
 
 const getAllPhotos = async (req, res) => {
   try {
@@ -82,4 +115,4 @@ const getImage = async (req, res) => {
 }
 
 
-export { createPhoto, getAllPhotos, getImage, deletePohoto };
+export { createPhoto, getAllPhotos, getImage, deletePohoto, updatePhoto };
