@@ -7,5 +7,6 @@ router.route("/about").get(pageController.getAboutPage);
 router.route('/register').get(pageController.getRegister);
 router.route("/login").get(pageController.getLogin);
 router.route("/logout").get(pageController.getLoguot);
-
+router.route("/contact").get(pageController.getContactPage);
+router.route('/contact').post(pageController.sendMail);
 export default router;
